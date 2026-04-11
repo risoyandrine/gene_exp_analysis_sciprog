@@ -1,4 +1,4 @@
-#' This script performs a Kmeans clustering on the expression data
+#' Performs a Kmeans clustering on the expression data
 #'
 #' @param expression_set An expression set object
 #' @param k_clusters Number of clusters, default is set to 5
@@ -30,7 +30,7 @@ kmeans_clust <- function(expression_set, k_clusters = 5, seed = 42) {
 }
 
 
-#' This script performs a hierarchical clustering on the expression data
+#' Performs a hierarchical clustering on the expression data
 #'
 #' @param expression_set An expression set object
 #' @param method The hierarchical clustering method to be used, set to complete as default

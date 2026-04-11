@@ -2,7 +2,7 @@
 % Please edit documentation in R/cluster.R
 \name{hierarchical_clust}
 \alias{hierarchical_clust}
-\title{This script performs a hierarchical clustering on the expression data}
+\title{Performs a hierarchical clustering on the expression data}
 \usage{
 hierarchical_clust(expression_set, method = "complete")
 }
@@ -15,7 +15,7 @@ hierarchical_clust(expression_set, method = "complete")
 A hierarchical clustering object
 }
 \description{
-This script performs a hierarchical clustering on the expression data
+Performs a hierarchical clustering on the expression data
 }
 \examples{
 \dontrun{

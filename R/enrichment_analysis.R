@@ -1,4 +1,5 @@
 #' Performs a GO enrichment analysis
+#'
 #' @param gene_list A list of genes
 #' @param OrgDb OrgDb database to use for annotation, default is "org.Hs.eg.db"
 #' @param keyType Type of gene ID, default is "ENSEMBL"

@@ -2,7 +2,7 @@
 % Please edit documentation in R/exploratory_analysis.R
 \name{plot_distr}
 \alias{plot_distr}
-\title{A function to plot the distribution of expression values per sample}
+\title{This function plots the distribution of expression values per sample}
 \usage{
 plot_distr(expression_set, title = "Distribution of Expression Data")
 }
@@ -15,7 +15,7 @@ plot_distr(expression_set, title = "Distribution of Expression Data")
 a ggplot2 plot of the expression distribution
 }
 \description{
-A function to plot the distribution of expression values per sample
+This function plots the distribution of expression values per sample
 }
 \examples{
 library(airway)

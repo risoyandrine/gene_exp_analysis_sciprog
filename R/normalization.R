@@ -1,4 +1,4 @@
-#' Normalize the data, we want to filter low expression genes from the ExpressionSet
+#' This function normalizes the data, we want to filter low expression genes from the ExpressionSet
 #'
 #' @param expression_set Expression Set object
 #' @param min_count minimum count threshold, default is set to 10
@@ -32,7 +32,7 @@ filter_low_exp <- function(expression_set, min_count = 10, min_samples = 2, alre
   return(expression_set[genes_to_keep, ])
 }
 
-#' Next step is to logtransform the data
+#' This function logtransform the data
 #'
 #' @param expression_set Expression Set object
 #' @param pseudo_count to avoid log(0)
@@ -54,7 +54,7 @@ log_transform <- function(expression_set, pseudo_count = 1) {
   return(expression_set)
 }
 
-#' Lastly, for the preprocessing of the data, we perform a quantile normalization
+#' This function performs a quantile normalization
 #'
 #' @param expression_set Expression Set object
 #' @return a quantile normalized expression set object

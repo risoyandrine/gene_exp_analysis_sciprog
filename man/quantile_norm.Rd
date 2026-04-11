@@ -2,7 +2,7 @@
 % Please edit documentation in R/normalization.R
 \name{quantile_norm}
 \alias{quantile_norm}
-\title{Lastly, for the preprocessing of the data, we perform a quantile normalization}
+\title{This function performs a quantile normalization}
 \usage{
 quantile_norm(expression_set)
 }
@@ -13,7 +13,7 @@ quantile_norm(expression_set)
 a quantile normalized expression set object
 }
 \description{
-Lastly, for the preprocessing of the data, we perform a quantile normalization
+This function performs a quantile normalization
 }
 \examples{
 \dontrun{

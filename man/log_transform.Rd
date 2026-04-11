@@ -2,7 +2,7 @@
 % Please edit documentation in R/normalization.R
 \name{log_transform}
 \alias{log_transform}
-\title{Next step is to logtransform the data}
+\title{This function logtransform the data}
 \usage{
 log_transform(expression_set, pseudo_count = 1)
 }
@@ -15,7 +15,7 @@ log_transform(expression_set, pseudo_count = 1)
 a log transformed expression set object
 }
 \description{
-Next step is to logtransform the data
+This function logtransform the data
 }
 \examples{
 \dontrun{

@@ -1,4 +1,4 @@
-#' A function to plot the distribution of expression values per sample
+#' This function plots the distribution of expression values per sample
 #'
 #' @param expression_set An expression set object
 #' @param title Plot title for the distribution plot
@@ -16,7 +16,7 @@
 plot_distr <- function(expression_set, title = "Distribution of Expression Data") {
   exp <- Biobase::exprs(expression_set)
 
-# we want to plot with ggplot2 and therefore need to transform the data to correct format
+  # we want to plot with ggplot2 and therefore need to transform the data to correct format
   exp_df <- as.data.frame(exp)
   exp_df$gene <- rownames(exp_df)
   exp_long <- tidyr::pivot_longer(exp_df, -gene, names_to = "sample", values_to = "expression")
@@ -91,7 +91,6 @@ sample_outlier_detection <- function(expression_set, threshold = 3) {
 
   message(length(outliers), " outlier samples detected with Z-score bigger than ", threshold)
   return(outliers)
-
 }
 
 #' Summary of the expression data
@@ -151,7 +150,7 @@ remove_outliers <- function(expression_set, threshold = 3) {
   } else {
     message("No outliers to remove.")
   }
-  
+
   return(expression_set)
 }
 
@@ -189,7 +188,9 @@ plot_boxplot <- function(expression_set, title = "Boxplot of Expression Data", l
     ggplot2::geom_boxplot(alpha = 0.7, outlier.size = 0.5, outlier.alpha = 0.2) +
     ggplot2::labs(title = title, x = "Sample", y = y_label) +
     ggplot2::theme_minimal() +
-    ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1),
-                   plot.title = ggplot2::element_text(hjust = 0.5, face = "bold"),
-                   legend.position = "none")
+    ggplot2::theme(
+      axis.text.x = ggplot2::element_text(angle = 45, hjust = 1),
+      plot.title = ggplot2::element_text(hjust = 0.5, face = "bold"),
+      legend.position = "none"
+    )
 }

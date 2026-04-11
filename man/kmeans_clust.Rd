@@ -2,7 +2,7 @@
 % Please edit documentation in R/cluster.R
 \name{kmeans_clust}
 \alias{kmeans_clust}
-\title{This script performs a Kmeans clustering on the expression data}
+\title{Performs a Kmeans clustering on the expression data}
 \usage{
 kmeans_clust(expression_set, k_clusters = 5, seed = 42)
 }
@@ -17,7 +17,7 @@ kmeans_clust(expression_set, k_clusters = 5, seed = 42)
 A kmeans object
 }
 \description{
-This script performs a Kmeans clustering on the expression data
+Performs a Kmeans clustering on the expression data
 }
 \examples{
 library(airway)
