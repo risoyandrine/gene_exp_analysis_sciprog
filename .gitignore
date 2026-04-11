@@ -1,0 +1,7 @@
+.Rproj.user
+Rplots.pdf
+.Rhistory
+.RData
+doc/
+Meta/
+*.Rcheck/

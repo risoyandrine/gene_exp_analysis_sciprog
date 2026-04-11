@@ -1,0 +1,141 @@
+---
+title: "Introduction to GeneExpressionAnalysis"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to GeneExpressionAnalysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Welcome to GeneExpressionAnalysis
+
+This package provides a pipeline for exploring, normalizing, clustering, and enriching gene expression data from `ExpressionSet` objects.
+
+### 1. Reading Data
+
+We start by loading the library and an example dataset. We will use the `airway` package dataset for this demonstration.
+
+```{r setup, message=FALSE, warning=FALSE}
+library(GeneExpressionAnalysis)
+library(airway)
+
+# Load the airway example data and convert to ExpressionSet
+data(airway)
+expression_set <- loadfromSumE(airway)
+```
+
+### 2. Exploratory Data Analysis (EDA) & Outliers
+
+Before normalization, it is essential to inspect the data distribution, summary statistics, and identify potential outliers.
+
+```{r eda, fig.width = 8, fig.height = 8}
+# View expression summary statistics
+expression_summary(expression_set)
+
+# View raw data distribution
+plot_boxplot(expression_set, log_scale = TRUE, title = "Raw Data Distribution")
+
+# Detect outliers (genes and samples)
+gene_outliers <- gene_outlier_detection(expression_set, threshold = 3)
+sample_outliers <- sample_outlier_detection(expression_set, threshold = 3)
+
+# Remove outliers (this handles both gene and sample detection internally, samples are not removed like genes but flagged)
+exp_clean <- remove_outliers(expression_set, threshold = 3)
+```
+
+### 3. Normalization
+
+Normalization ensures that expression levels are comparable across samples. This involves filtering low-expression genes, log transformation, and quantile normalization.
+
+```{r normalization, fig.width = 8, fig.height = 8}
+# Filter out low expression genes
+exp_filtered <- filter_low_exp(exp_clean, min_count = 10)
+
+# Log transform the data
+exp_log <- log_transform(exp_filtered)
+
+# Apply quantile normalization
+exp_norm <- quantile_norm(exp_log)
+
+# View density distribution across samples after normalization
+plot_distr(exp_norm, title = "Normalized Data Distribution (Density)")
+
+# View normalized distribution (we now expect it to be symmetrical and centered)
+plot_boxplot(exp_norm, title = "Normalized Data Distribution")
+```
+
+### 4. Clustering
+
+We provide both k-means and hierarchical clustering methods. First, we can determine the optimal number of clusters for k-means using an elbow plot.
+
+```{r clustering, message=FALSE, warning=FALSE, fig.width = 8, fig.height = 8}
+# Plot the elbow to find optimal k
+optimal_k(exp_norm, max_k = 10)
+
+# Perform k-means clustering with k=5
+km <- kmeans_clust(exp_norm, k_clusters = 5)
+
+# Perform hierarchical clustering on top 50 most variable genes
+gene_var <- apply(Biobase::exprs(exp_norm), 1, var)
+exp_top <- exp_norm[order(gene_var, decreasing = TRUE)[1:50], ]
+hc <- hierarchical_clust(exp_top)
+```
+
+### 5. Visualization
+
+We can visualize the results using various high-level plotting functions.
+
+```{r visualization, fig.width = 12, fig.height = 8}
+# 1. PCA Plot
+plot_PCA(exp_norm)
+
+# 2. Heatmap of top variable genes
+plot_heatmap(exp_norm, top_n_genes = 50)
+
+# 3. Gene Dendrogram (from hierarchical clustering)
+plot_den(hc$hclust)
+
+# 4. Sample Dendrogram (all genes)
+plot_sample_den(exp_norm)
+```
+
+### 6. Enrichment Analysis
+
+We support GO Enrichment, KEGG Enrichment, and Gene Set Enrichment Analysis (GSEA) to reveal the underlying biology of identified gene clusters.
+
+```{r enrichment, message=FALSE, warning=FALSE, fig.width=8, fig.height=8, cache=TRUE}
+cluster1_genes <- names(km$cluster[km$cluster == 1])
+
+# 1. GO Enrichment
+go_res <- go_enrich(cluster1_genes)
+plot_enrichment(go_res, top_n = 10)
+
+# 2. KEGG Enrichment
+kegg_res <- kegg_enrich(cluster1_genes)
+plot_enrichment(kegg_res, top_n = 10)
+
+# 3. GSEA
+gsea_res <- go_gse(exp_norm, condition_col = "dex", reference_level = "untrt")
+plot_enrichment(gsea_res, top_n = 10)
+```
+
+### The All-In-One Pipeline
+
+Instead of running the above steps manually, `GeneExpressionAnalysis` provides the `run_full_pipeline()` function to execute the entire analysis in a single command.
+
+```{r full-pipeline, eval=FALSE}
+results <- run_full_pipeline(
+  expression_set = expression_set,
+  k_clusters = 5,
+  enrich_cluster = 1,
+  condition_col = "dex",
+  reference_level = "untrt"
+)
+```
