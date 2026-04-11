@@ -24,8 +24,7 @@ Install the latest version of `GeneExpressionAnalysis` from GitHub:
 
 ```R
 if (!require("devtools")) install.packages("devtools")
-devtools::install_github("andrinerisoy/GeneExpressionAnalysis")
-```
+devtools::install_github("risoyandrine/gene_exp_analysis_sciprog")```
 
 ## Quick Start
 
