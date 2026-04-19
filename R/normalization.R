@@ -1,4 +1,4 @@
-#' This function normalizes the data, we want to filter low expression genes from the ExpressionSet
+#' This function normalizes the data, specifically it filters out low expression genes
 #'
 #' @param expression_set Expression Set object
 #' @param min_count minimum count threshold, default is set to 10
@@ -17,11 +17,11 @@
 
 filter_low_exp <- function(expression_set, min_count = 10, min_samples = 2, already_log = FALSE) {
   exp <- Biobase::exprs(expression_set)
-  # we start with some basic checks
+  # making sure the data is following the correct format
   if (!is.numeric(Biobase::exprs(expression_set))) stop("Expression data must be numeric")
   if (nrow(Biobase::exprs(expression_set)) == 0) stop("No genes remaining after filtering")
 
-  # if data is already log-transformed, we adjust the min_count threshold proportionally
+  # if data is already log-transformed, the min_count threshold is adjusted proportionally
   if (already_log) {
     message("Data is log-transformed. Adjusting filtering threshold.")
     min_count <- log2(min_count + 1)

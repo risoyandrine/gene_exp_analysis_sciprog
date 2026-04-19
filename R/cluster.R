@@ -14,10 +14,10 @@
 
 kmeans_clust <- function(expression_set, k_clusters = 5, seed = 42) {
   exp <- Biobase::exprs(expression_set)
-  # we start with some basic checks to validate input
-  if (!is.numeric(exp)) stop("Expression data must be a numeric matrix")
-  if (nrow(exp) == 0) stop("No genes remaining after filtering, we cannot perform clustering")
-  if (k_clusters > nrow(exp)) stop("Number of clusters is greater than the number of genes")
+  # check that the input is valid
+  if (!is.numeric(exp)) stop("The expression data has to be a numeric matrix")
+  if (nrow(exp) == 0) stop("No genes are remaining after filtering")
+  if (k_clusters > nrow(exp)) stop("The number of clusters is larger than the number of genes")
 
   set.seed(seed)
 
@@ -71,7 +71,6 @@ hierarchical_clust <- function(expression_set, method = "complete") {
 optimal_k <- function(expression_set, max_k = 10, seed = 42) {
   exp <- Biobase::exprs(expression_set)
   set.seed(seed)
-  # we calculate Total Within-Cluster Sum of Squares (WSS)
   wss <- numeric(max_k)
   for (k in 1:max_k) {
     km_result <- stats::kmeans(exp, centers = k, iter.max = 100, nstart = 10)

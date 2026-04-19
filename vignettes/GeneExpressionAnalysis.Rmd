@@ -20,7 +20,7 @@ This package provides a pipeline for exploring, normalizing, clustering, and enr
 
 ### 1. Reading Data
 
-We start by loading the library and an example dataset. We will use the `airway` package dataset for this demonstration.
+Start by loading the library and an example dataset. We will use the `airway` package dataset for this demonstration.
 
 ```{r setup, message=FALSE, warning=FALSE}
 library(GeneExpressionAnalysis)
@@ -67,13 +67,13 @@ exp_norm <- quantile_norm(exp_log)
 # View density distribution across samples after normalization
 plot_distr(exp_norm, title = "Normalized Data Distribution (Density)")
 
-# View normalized distribution (we now expect it to be symmetrical and centered)
+# View normalized distribution, which should be symmetrical and centered
 plot_boxplot(exp_norm, title = "Normalized Data Distribution")
 ```
 
 ### 4. Clustering
 
-We provide both k-means and hierarchical clustering methods. First, we can determine the optimal number of clusters for k-means using an elbow plot.
+Two clustering methods are provided: k-means and hierarchical clustering. Additionally, the optimal number of clusters for k-means can be determined using an elbow plot.
 
 ```{r clustering, message=FALSE, warning=FALSE, fig.width = 8, fig.height = 8}
 # Plot the elbow to find optimal k
@@ -90,7 +90,7 @@ hc <- hierarchical_clust(exp_top)
 
 ### 5. Visualization
 
-We can visualize the results using various high-level plotting functions.
+The results are visualized using PCA, heatmaps, and dendrograms.
 
 ```{r visualization, fig.width = 12, fig.height = 8}
 # 1. PCA Plot
@@ -108,7 +108,7 @@ plot_sample_den(exp_norm)
 
 ### 6. Enrichment Analysis
 
-We support GO Enrichment, KEGG Enrichment, and Gene Set Enrichment Analysis (GSEA) to reveal the underlying biology of identified gene clusters.
+The package supports GO Enrichment, KEGG Enrichment, and Gene Set Enrichment Analysis (GSEA) to look into the underlying biology of identified gene clusters.
 
 ```{r enrichment, message=FALSE, warning=FALSE, fig.width=8, fig.height=8, cache=TRUE}
 cluster1_genes <- names(km$cluster[km$cluster == 1])

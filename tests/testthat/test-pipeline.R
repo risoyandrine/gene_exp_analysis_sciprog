@@ -58,3 +58,18 @@ test_that("remove_outliers executes without destroying structure", {
   # since it removes genes, the number of features should be less than or equal to original
   expect_true(nrow(exprs(res)) <= nrow(exprs(mock_eset)))
 })
+
+test_that("quantile_norm equalizes sample distributions", {
+  res <- quantile_norm(log_transform(filter_low_exp(mock_eset)))
+  medians <- apply(exprs(res), 2, median)
+  expect_true(diff(range(medians)) < 1e-10)
+})
+
+test_that("expression_summary returns invisible NULL and prints correctly", {
+  output <- capture.output(res <- expression_summary(mock_eset), type = "output")
+  expect_null(res)
+  # check that the output contains expected labels
+  expect_true(any(grepl("Number of genes", output)))
+  expect_true(any(grepl("Number of samples", output)))
+  expect_true(any(grepl("Mean expression", output)))
+})

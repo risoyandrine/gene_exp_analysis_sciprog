@@ -16,7 +16,7 @@
 plot_distr <- function(expression_set, title = "Distribution of Expression Data") {
   exp <- Biobase::exprs(expression_set)
 
-  # we want to plot with ggplot2 and therefore need to transform the data to correct format
+  # to plot using ggplot2, the data is transformed to the correct format
   exp_df <- as.data.frame(exp)
   exp_df$gene <- rownames(exp_df)
   exp_long <- tidyr::pivot_longer(exp_df, -gene, names_to = "sample", values_to = "expression")
@@ -79,14 +79,11 @@ gene_outlier_detection <- function(expression_set, threshold = 3) {
 sample_outlier_detection <- function(expression_set, threshold = 3) {
   exp <- Biobase::exprs(expression_set)
 
-  # calculate mean and sd for each sample
   avg_sample_exp <- colMeans(exp, na.rm = TRUE)
 
-  # calculate z-scores across genes
   z_scores <- scale(avg_sample_exp)
   z_scores <- as.numeric(z_scores)
 
-  # identify outliers above set threshold
   outliers <- colnames(exp)[abs(z_scores) > threshold]
 
   message(length(outliers), " outlier samples detected with Z-score bigger than ", threshold)
@@ -138,12 +135,9 @@ remove_outliers <- function(expression_set, threshold = 3) {
   sample_outliers <- sample_outlier_detection(expression_set, threshold = threshold)
 
   if (length(sample_outliers) > 0) {
-    # we keep only samples that are not in the outlier list
     warning("Outlier samples detected, but not removed. Consider removing outliers manually: ", paste(sample_outliers, collapse = ", "))
   }
-
   if (length(gene_outliers) > 0) {
-    # we keep only genes that are not in the outlier list
     genes_to_keep <- !(rownames(Biobase::exprs(expression_set)) %in% gene_outliers)
     expression_set <- expression_set[genes_to_keep, ]
     message("Removed ", length(gene_outliers), " outlier genes.")
@@ -172,7 +166,6 @@ remove_outliers <- function(expression_set, threshold = 3) {
 plot_boxplot <- function(expression_set, title = "Boxplot of Expression Data", log_scale = FALSE) {
   exp <- Biobase::exprs(expression_set)
 
-  # we want to plot with ggplot2 and therefore need to transform the data to correct format
   exp_df <- as.data.frame(exp)
   exp_df$gene <- rownames(exp_df)
   exp_long <- tidyr::pivot_longer(exp_df, -gene, names_to = "sample", values_to = "expression")

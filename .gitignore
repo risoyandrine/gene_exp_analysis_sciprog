@@ -6,3 +6,5 @@ doc/
 Meta/
 *.Rcheck/
 .DS_Store
+/doc/
+/Meta/

@@ -2,7 +2,7 @@
 % Please edit documentation in R/normalization.R
 \name{filter_low_exp}
 \alias{filter_low_exp}
-\title{This function normalizes the data, we want to filter low expression genes from the ExpressionSet}
+\title{This function normalizes the data, specifically it filters out low expression genes}
 \usage{
 filter_low_exp(
   expression_set,
@@ -24,7 +24,7 @@ filter_low_exp(
 a filtered expression set object without the lowly expressed genes
 }
 \description{
-This function normalizes the data, we want to filter low expression genes from the ExpressionSet
+This function normalizes the data, specifically it filters out low expression genes
 }
 \examples{
 \dontrun{

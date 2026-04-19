@@ -69,11 +69,9 @@ plot_heatmap <- function(expression_set,
 plot_PCA <- function(expression_set, top_genes_pca = 500) {
   exp <- Biobase::exprs(expression_set)
 
-  # remove genes with 0 variance to prevent prcomp execution failures
   gene_vars <- apply(exp, 1, var)
   exp <- exp[gene_vars > 0, ]
 
-  # subset to top variable genes before PCA to improve performance and stability
   if (nrow(exp) > top_genes_pca) {
     exp <- exp[order(gene_vars[gene_vars > 0],
       decreasing = TRUE
@@ -82,10 +80,8 @@ plot_PCA <- function(expression_set, top_genes_pca = 500) {
 
   pca <- prcomp(t(exp), scale. = TRUE)
 
-  # calculate the explained variance for each principle component
   explained_var <- round(100 * pca$sdev^2 / sum(pca$sdev^2), 1)
 
-  # since we are going to use ggplot, we build the data frame for plotting
   df_pca <- data.frame(
     pc_1 = pca$x[, 1],
     pc_2 = pca$x[, 2],

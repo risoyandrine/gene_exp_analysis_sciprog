@@ -3,6 +3,8 @@ Title: Gene Expression Analysis and Clustering
 Version: 0.1.0
 Authors@R: 
     person("Andrine", "Risøy", , "andrinerisoy@icloud.com", role = c("aut", "cre"))
+Author: Andrine Risøy [aut, cre]
+Maintainer: Andrine Risøy <andrinerisoy@icloud.com>
 Description: Analyzes and clusters gene expression data from common 
     formats using Bioconductor data structures. The package provides normalization,
     clustering, visualization and gene set enrichment analysis.

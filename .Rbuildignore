@@ -1,2 +1,5 @@
 ^GeneExpressionAnalysis\.Rproj$
 ^\.Rproj\.user$
+^\.\.Rcheck$
+^doc$
+^Meta$

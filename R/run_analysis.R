@@ -50,9 +50,8 @@ run_full_pipeline <- function(expression_set, k_clusters = 5,
     stop("enrich_cluster cannot be greater than k_clusters")
   }
 
-  # remove outlier genes
+  # step 1: preprocessing of the data
   expression_set <- remove_outliers(expression_set, threshold = threshold)
-  # we start by filtering low expressed genes
   expression_set <- filter_low_exp(
     expression_set,
     min_count = min_count,
@@ -60,41 +59,34 @@ run_full_pipeline <- function(expression_set, k_clusters = 5,
     already_log = already_log
   )
 
-  # only log transform if the data is not already log-transformed
   if (!already_log) {
-    # then we log transform the data
     expression_set <- log_transform(expression_set)
   }
-
-  # always quantile normalize the data to ensure comparable distributions
   expression_set <- quantile_norm(expression_set)
-  # show elbow plot to justify choice of k
+
+  # step 2: clustering
   optimal_k(expression_set, max_k = 10)
-  # perform kmeans clustering
   km <- kmeans_clust(expression_set, k_clusters, seed)
-  # perform hierarchical clustering
   hc <- hierarchical_clust(expression_set, method)
-  # perform GO enrichment analysis
+
+  # step 3: enrichment analysis
   go_result <- go_enrich(names(km$cluster[km$cluster == enrich_cluster]),
     OrgDb = OrgDb, keyType = keyType
   )
-  # perform KEGG enrichment analysis
   kegg_result <- kegg_enrich(names(km$cluster[km$cluster == enrich_cluster]),
     OrgDb = OrgDb,
     organism = organism,
     keyType = keyType
   )
-  # perform gene set enrichment analysis
   gse_result <- go_gse(expression_set, condition_col, reference_level,
     OrgDb = OrgDb, keyType = keyType
   )
-  # plot the results
+  # step 4: plotting
   print(plot_distr(expression_set))
   print(plot_boxplot(expression_set, title = "Boxplot of Normalized Data"))
   plot_heatmap(expression_set, top_n_genes = top_n_genes)
   print(plot_PCA(expression_set, top_genes_pca = top_genes_pca))
 
-  # for the gene dendrogram, we subset to the top 50 variable genes to avoid the 'black blob' viz problem
   gene_var <- apply(Biobase::exprs(expression_set), 1, var)
   exp_top <- expression_set[order(gene_var, decreasing = TRUE)[1:50], ]
   hc_vis <- hierarchical_clust(exp_top, method)
@@ -111,7 +103,6 @@ run_full_pipeline <- function(expression_set, k_clusters = 5,
 
   cat("\n Enrichment Analysis\n")
 
-  # helper to print top pathways cleanly
   print_enrich_summary <- function(result_obj, name) {
     df <- as.data.frame(result_obj)
     cat(sprintf("Significant %s terms: %d\n", name, nrow(df)))

@@ -40,7 +40,6 @@ go_enrich <- function(gene_list, OrgDb = "org.Hs.eg.db", keyType = "ENSEMBL") {
 
 kegg_enrich <- function(gene_list, OrgDb = "org.Hs.eg.db", organism = "hsa", keyType = "ENSEMBL") {
   entrez_ids <- clusterProfiler::bitr(gene_list, fromType = keyType, toType = "ENTREZID", OrgDb = OrgDb) # convert to entrez ids, which are KEGG compatible format
-  # we check if there are any genes left to analyze
   if (nrow(entrez_ids) == 0) stop("No genes could be converted to Entrez IDs")
   enrichment_kegg <- clusterProfiler::enrichKEGG(gene = entrez_ids$ENTREZID, organism = organism)
   return(enrichment_kegg)
@@ -50,7 +49,7 @@ kegg_enrich <- function(gene_list, OrgDb = "org.Hs.eg.db", organism = "hsa", key
 #' Performs Gene Set Enrichment Analysis
 #'
 #' @param expression_set An expression set object
-#' @param condition_col The column in the phenoData to be used for the differential expression
+#' @param condition_col The column in the phenoData will be used for the differential expression
 #' @param reference_level The reference level for the condition
 #' @param OrgDb OrgDb database to use for annotation, default is "org.Hs.eg.db"
 #' @param keyType Type of gene ID, default is "ENSEMBL"

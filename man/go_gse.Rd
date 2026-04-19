@@ -15,7 +15,7 @@ go_gse(
 \arguments{
 \item{expression_set}{An expression set object}
 
-\item{condition_col}{The column in the phenoData to be used for the differential expression}
+\item{condition_col}{The column in the phenoData will be used for the differential expression}
 
 \item{reference_level}{The reference level for the condition}
 
