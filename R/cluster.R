@@ -41,6 +41,7 @@ kmeans_clust <- function(expression_set, k_clusters = 5) {
 #' @export
 
 hierarchical_clust <- function(expression_set, method = "complete") {
+  if (!is(expression_set, "ExpressionSet")) stop("The expression data need to be an ExpressionSet object")
   exp <- Biobase::exprs(expression_set)
 
   distance_matrix <- dist(exp)

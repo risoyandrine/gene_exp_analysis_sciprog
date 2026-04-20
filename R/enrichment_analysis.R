@@ -93,6 +93,7 @@ plot_enrichment <- function(enrichment_result, top_n = 10, title = "Enrichment a
   # if no significant pathways were found, return an error message
   if (nrow(as.data.frame(enrichment_result)) == 0) {
     message("No significant enrichment pathways found to plot.")
+    return(invisible(NULL))
   }
 
   enrichplot::dotplot(enrichment_result, showCategory = top_n) +

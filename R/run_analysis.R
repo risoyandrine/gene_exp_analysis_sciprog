@@ -67,7 +67,7 @@ run_full_pipeline <- function(expression_set, k_clusters = 5,
   expression_set <- quantile_norm(expression_set)
 
   # step 2: clustering
-  optimal_k(expression_set, max_k = 10)
+  print(optimal_k(expression_set, max_k = 10))
   km <- kmeans_clust(expression_set, k_clusters)
   hc <- hierarchical_clust(expression_set, method)
 
