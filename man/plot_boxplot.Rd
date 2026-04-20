@@ -24,11 +24,9 @@ a ggplot2 boxplot of the expression distribution
 A function to plot the expression distribution using boxplots per sample
 }
 \examples{
-\dontrun{
 library(airway)
 data(airway)
 expression_set <- loadfromSumE(airway)
 expression_set <- filter_low_exp(expression_set)
 plot_boxplot(expression_set, log_scale = TRUE)
-}
 }

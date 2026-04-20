@@ -3,9 +3,7 @@
 #' @param file Represents a path to a CSV file with genes as rows and samples as columns
 #' @return An ExpressionSet object
 #' @examples
-#' \dontrun{
 #' expression_set <- loadfromCSV("path/to/data.csv")
-#' }
 #' @export
 loadfromCSV <- function(file) {
   if (!file.exists(file)) {

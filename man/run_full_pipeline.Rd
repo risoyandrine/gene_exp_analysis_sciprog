@@ -74,10 +74,10 @@ A list containing:
 The function runs the full pipeline
 }
 \examples{
-\dontrun{
-library(airway)
-data(airway)
-expression_set <- loadfromSumE(airway)
-run_full_pipeline(expression_set)
+if (requireNamespace("airway", quietly = TRUE)) {
+  library(airway)
+  data(airway)
+  expression_set <- loadfromSumE(airway)
+  run_full_pipeline(expression_set)
 }
 }

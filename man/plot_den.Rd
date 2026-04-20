@@ -16,7 +16,6 @@ plots the dendrogram
 Plot dendrogram
 }
 \examples{
-\dontrun{
 library(airway)
 data(airway)
 expression_set <- loadfromSumE(airway)
@@ -25,5 +24,4 @@ exp_set_log <- log_transform(exp_set_filtered)
 exp_set_norm <- quantile_norm(exp_set_log)
 hc <- hierarchical_clust(exp_set_norm)
 plot_den(hc$hclust)
-}
 }

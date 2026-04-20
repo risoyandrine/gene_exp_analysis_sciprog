@@ -30,11 +30,9 @@ A GSEA enrichment object
 Performs Gene Set Enrichment Analysis
 }
 \examples{
-\dontrun{
 library(airway)
 data(airway)
 expression_set <- loadfromSumE(airway)
 exp_norm <- quantile_norm(log_transform(filter_low_exp(expression_set)))
 go_gse(exp_norm, condition_col = "dex", reference_level = "untrt")
-}
 }

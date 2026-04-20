@@ -4,14 +4,12 @@
 \alias{kmeans_clust}
 \title{Performs a Kmeans clustering on the expression data}
 \usage{
-kmeans_clust(expression_set, k_clusters = 5, seed = 42)
+kmeans_clust(expression_set, k_clusters = 5)
 }
 \arguments{
 \item{expression_set}{An expression set object}
 
 \item{k_clusters}{Number of clusters, default is set to 5}
-
-\item{seed}{Seed for reproducibility, default is set to 42}
 }
 \value{
 A kmeans object

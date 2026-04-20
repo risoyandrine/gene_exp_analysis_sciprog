@@ -27,10 +27,8 @@ a filtered expression set object without the lowly expressed genes
 This function normalizes the data, specifically it filters out low expression genes
 }
 \examples{
-\dontrun{
 library(airway)
 data(airway)
 expression_set <- loadfromSumE(airway)
 exp_set_filtered <- filter_low_exp(expression_set, already_log = FALSE)
-}
 }

@@ -1,5 +1,7 @@
 ^GeneExpressionAnalysis\.Rproj$
 ^\.Rproj\.user$
-^\.\.Rcheck$
+^.*\.Rcheck$
 ^doc$
 ^Meta$
+.DS_Store
+^\.git$

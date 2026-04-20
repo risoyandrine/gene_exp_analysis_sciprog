@@ -20,12 +20,10 @@ A GO enrichment object
 Performs a GO enrichment analysis
 }
 \examples{
-\dontrun{
 library(airway)
 data(airway)
 expression_set <- loadfromSumE(airway)
 km <- kmeans_clust(expression_set, 5)
 gene_list <- names(km$cluster[km$cluster == 1])
 go_enrich(gene_list)
-}
 }

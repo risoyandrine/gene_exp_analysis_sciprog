@@ -122,13 +122,11 @@ expression_summary <- function(expression_set) {
 #' @param threshold Tolerated standard deviations from the mean
 #' @return A filtered expression set object with outlier genes removed
 #' @examples
-#' \dontrun{
 #' library(airway)
 #' data(airway)
 #' expression_set <- loadfromSumE(airway)
 #' expression_set <- filter_low_exp(expression_set)
 #' exp_clean <- remove_outliers(expression_set, threshold = 3)
-#' }
 #' @export
 remove_outliers <- function(expression_set, threshold = 3) {
   gene_outliers <- gene_outlier_detection(expression_set, threshold = threshold)
@@ -155,13 +153,11 @@ remove_outliers <- function(expression_set, threshold = 3) {
 #' @param log_scale Logical, whether to apply a log2 transformation before plotting. Default is FALSE.
 #' @return a ggplot2 boxplot of the expression distribution
 #' @examples
-#' \dontrun{
 #' library(airway)
 #' data(airway)
 #' expression_set <- loadfromSumE(airway)
 #' expression_set <- filter_low_exp(expression_set)
 #' plot_boxplot(expression_set, log_scale = TRUE)
-#' }
 #' @export
 plot_boxplot <- function(expression_set, title = "Boxplot of Expression Data", log_scale = FALSE) {
   exp <- Biobase::exprs(expression_set)

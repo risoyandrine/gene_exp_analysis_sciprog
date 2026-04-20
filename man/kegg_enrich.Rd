@@ -27,12 +27,10 @@ A KEGG enrichment object
 Performs a KEGG enrichment analysis
 }
 \examples{
-\dontrun{
 library(airway)
 data(airway)
 expression_set <- loadfromSumE(airway)
 km <- kmeans_clust(expression_set, 5)
 gene_list <- names(km$cluster[km$cluster == 1])
 kegg_enrich(gene_list)
-}
 }

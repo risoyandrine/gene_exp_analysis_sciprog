@@ -5,14 +5,12 @@
 #' @param keyType Type of gene ID, default is "ENSEMBL"
 #' @return A GO enrichment object
 #' @examples
-#' \dontrun{
 #' library(airway)
 #' data(airway)
 #' expression_set <- loadfromSumE(airway)
 #' km <- kmeans_clust(expression_set, 5)
 #' gene_list <- names(km$cluster[km$cluster == 1])
 #' go_enrich(gene_list)
-#' }
 #' @export
 
 go_enrich <- function(gene_list, OrgDb = "org.Hs.eg.db", keyType = "ENSEMBL") {
@@ -28,14 +26,12 @@ go_enrich <- function(gene_list, OrgDb = "org.Hs.eg.db", keyType = "ENSEMBL") {
 #' @param keyType Type of gene ID, default is "ENSEMBL"
 #' @return A KEGG enrichment object
 #' @examples
-#' \dontrun{
 #' library(airway)
 #' data(airway)
 #' expression_set <- loadfromSumE(airway)
 #' km <- kmeans_clust(expression_set, 5)
 #' gene_list <- names(km$cluster[km$cluster == 1])
 #' kegg_enrich(gene_list)
-#' }
 #' @export
 
 kegg_enrich <- function(gene_list, OrgDb = "org.Hs.eg.db", organism = "hsa", keyType = "ENSEMBL") {
@@ -55,13 +51,11 @@ kegg_enrich <- function(gene_list, OrgDb = "org.Hs.eg.db", organism = "hsa", key
 #' @param keyType Type of gene ID, default is "ENSEMBL"
 #' @return A GSEA enrichment object
 #' @examples
-#' \dontrun{
 #' library(airway)
 #' data(airway)
 #' expression_set <- loadfromSumE(airway)
 #' exp_norm <- quantile_norm(log_transform(filter_low_exp(expression_set)))
 #' go_gse(exp_norm, condition_col = "dex", reference_level = "untrt")
-#' }
 #' @export
 
 go_gse <- function(expression_set, condition_col, reference_level, OrgDb = "org.Hs.eg.db", keyType = "ENSEMBL") {
@@ -85,7 +79,6 @@ go_gse <- function(expression_set, condition_col, reference_level, OrgDb = "org.
 #' @param top_n Number of top enriched terms to plot
 #' @return A plot of the enrichment results
 #' @examples
-#' \dontrun{
 #' library(airway)
 #' data(airway)
 #' expression_set <- loadfromSumE(airway)
@@ -93,7 +86,6 @@ go_gse <- function(expression_set, condition_col, reference_level, OrgDb = "org.
 #' gene_list <- names(km$cluster[km$cluster == 1])
 #' go_result <- go_enrich(gene_list)
 #' plot_enrichment(go_result)
-#' }
 #' @export
 
 plot_enrichment <- function(enrichment_result, top_n = 10) {

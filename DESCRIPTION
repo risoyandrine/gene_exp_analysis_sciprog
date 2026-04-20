@@ -1,10 +1,9 @@
 Package: GeneExpressionAnalysis
 Title: Gene Expression Analysis and Clustering
 Version: 0.1.0
-Authors@R: 
-    person("Andrine", "Risøy", , "andrinerisoy@icloud.com", role = c("aut", "cre"))
-Author: Andrine Risøy [aut, cre]
-Maintainer: Andrine Risøy <andrinerisoy@icloud.com>
+Authors@R: person("Andrine", "Risøy", 
+                email="andrinerisoy@icloud.com", 
+                role = c("aut", "cre"))
 Description: Analyzes and clusters gene expression data from common 
     formats using Bioconductor data structures. The package provides normalization,
     clustering, visualization and gene set enrichment analysis.
@@ -12,7 +11,7 @@ License: GPL-3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
-BiocViews: GeneExpression, Clustering, Visualization
+biocViews: GeneExpression, Clustering, Visualization, RNASeq, Pathways, GeneSetEnrichment, Normalization
 Suggests: 
     testthat (>= 3.0.0),
     knitr,
@@ -22,8 +21,7 @@ Suggests:
 VignetteBuilder: knitr
 Config/testthat/edition: 3
 Depends: 
-    R (>= 3.5)
-LazyData: true
+    R (>= 4.5.0)
 Imports:
     Biobase,
     SummarizedExperiment,

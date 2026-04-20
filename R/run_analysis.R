@@ -27,11 +27,11 @@
 #'   \item gsea: GSEA enrichment results
 #' }
 #' @examples
-#' \dontrun{
-#' library(airway)
-#' data(airway)
-#' expression_set <- loadfromSumE(airway)
-#' run_full_pipeline(expression_set)
+#' if (requireNamespace("airway", quietly = TRUE)) {
+#'   library(airway)
+#'   data(airway)
+#'   expression_set <- loadfromSumE(airway)
+#'   run_full_pipeline(expression_set)
 #' }
 #' @export
 
@@ -88,7 +88,7 @@ run_full_pipeline <- function(expression_set, k_clusters = 5,
   print(plot_PCA(expression_set, top_genes_pca = top_genes_pca))
 
   gene_var <- apply(Biobase::exprs(expression_set), 1, var)
-  exp_top <- expression_set[order(gene_var, decreasing = TRUE)[1:50], ]
+  exp_top <- expression_set[order(gene_var, decreasing = TRUE)[seq_len(50)], ]
   hc_vis <- hierarchical_clust(exp_top, method)
   plot_den(hc_vis$hclust)
 

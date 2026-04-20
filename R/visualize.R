@@ -34,7 +34,7 @@ plot_heatmap <- function(expression_set,
       top_n_genes, top_n_genes
     ))
     gene_vars <- apply(exp, 1, var, na.rm = TRUE)
-    exp <- exp[order(gene_vars, decreasing = TRUE)[1:top_n_genes], ]
+    exp <- exp[order(gene_vars, decreasing = TRUE)[seq_len(top_n_genes)], ]
   }
 
   # Custom blue-white-red palette
@@ -75,7 +75,7 @@ plot_PCA <- function(expression_set, top_genes_pca = 500) {
   if (nrow(exp) > top_genes_pca) {
     exp <- exp[order(gene_vars[gene_vars > 0],
       decreasing = TRUE
-    )[1:top_genes_pca], ]
+    )[seq_len(top_genes_pca)], ]
   }
 
   pca <- prcomp(t(exp), scale. = TRUE)
@@ -109,7 +109,6 @@ plot_PCA <- function(expression_set, top_genes_pca = 500) {
 #' @param hc An hclust object
 #' @return plots the dendrogram
 #' @examples
-#' \dontrun{
 #' library(airway)
 #' data(airway)
 #' expression_set <- loadfromSumE(airway)
@@ -118,7 +117,6 @@ plot_PCA <- function(expression_set, top_genes_pca = 500) {
 #' exp_set_norm <- quantile_norm(exp_set_log)
 #' hc <- hierarchical_clust(exp_set_norm)
 #' plot_den(hc$hclust)
-#' }
 #' @export
 
 plot_den <- function(hc) {
@@ -132,7 +130,6 @@ plot_den <- function(hc) {
 #' @param method The hierarchical clustering method to be used, default is "complete"
 #' @return plots the dendrogram
 #' @examples
-#' \dontrun{
 #' library(airway)
 #' data(airway)
 #' expression_set <- loadfromSumE(airway)
@@ -140,7 +137,6 @@ plot_den <- function(hc) {
 #' exp_set_log <- log_transform(exp_set_filtered)
 #' exp_set_norm <- quantile_norm(exp_set_log)
 #' plot_sample_den(exp_set_norm)
-#' }
 #' @export
 
 plot_sample_den <- function(expression_set, method = "complete") {

@@ -18,11 +18,9 @@ A filtered expression set object with outlier genes removed
 Remove outlier genes from the expression set
 }
 \examples{
-\dontrun{
 library(airway)
 data(airway)
 expression_set <- loadfromSumE(airway)
 expression_set <- filter_low_exp(expression_set)
 exp_clean <- remove_outliers(expression_set, threshold = 3)
-}
 }

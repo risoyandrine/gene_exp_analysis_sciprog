@@ -18,11 +18,9 @@ A hierarchical clustering object
 Performs a hierarchical clustering on the expression data
 }
 \examples{
-\dontrun{
 library(airway)
 data(airway)
 expression_set <- loadfromSumE(airway)
 hc_tree <- hierarchical_clust(expression_set, "complete")
 hc_clust <- cutree(hc_tree, k = 5)
-}
 }

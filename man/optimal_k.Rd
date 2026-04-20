@@ -4,14 +4,12 @@
 \alias{optimal_k}
 \title{Plot the Elbow Method to find the optimal number of clusters}
 \usage{
-optimal_k(expression_set, max_k = 10, seed = 42)
+optimal_k(expression_set, max_k = 10)
 }
 \arguments{
 \item{expression_set}{An expression set object}
 
 \item{max_k}{The maximum number of clusters to test, default is 10}
-
-\item{seed}{Seed for reproducibility}
 }
 \value{
 A ggplot object showing the elbow plot
@@ -20,10 +18,8 @@ A ggplot object showing the elbow plot
 Plot the Elbow Method to find the optimal number of clusters
 }
 \examples{
-\dontrun{
 library(airway)
 data(airway)
 expression_set <- loadfromSumE(airway)
 optimal_k(expression_set)
-}
 }

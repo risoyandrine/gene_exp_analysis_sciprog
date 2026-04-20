@@ -16,12 +16,10 @@ a quantile normalized expression set object
 This function performs a quantile normalization
 }
 \examples{
-\dontrun{
 library(airway)
 data(airway)
 expression_set <- loadfromSumE(airway)
 exp_set_filtered <- filter_low_exp(expression_set)
 exp_set_log <- log_transform(exp_set_filtered)
 exp_set_norm <- quantile_norm(exp_set_log)
-}
 }

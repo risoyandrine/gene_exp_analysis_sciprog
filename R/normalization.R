@@ -6,12 +6,10 @@
 #' @param already_log Logical, whether the data is already log-transformed. Default is FALSE.
 #' @return a filtered expression set object without the lowly expressed genes
 #' @examples
-#' \dontrun{
 #' library(airway)
 #' data(airway)
 #' expression_set <- loadfromSumE(airway)
 #' exp_set_filtered <- filter_low_exp(expression_set, already_log = FALSE)
-#' }
 #' @export
 
 
@@ -38,13 +36,11 @@ filter_low_exp <- function(expression_set, min_count = 10, min_samples = 2, alre
 #' @param pseudo_count to avoid log(0)
 #' @return a log transformed expression set object
 #' @examples
-#' \dontrun{
 #' library(airway)
 #' data(airway)
 #' expression_set <- loadfromSumE(airway)
 #' exp_set_filtered <- filter_low_exp(expression_set)
 #' exp_set_log <- log_transform(exp_set_filtered)
-#' }
 #' @export
 
 
@@ -59,14 +55,12 @@ log_transform <- function(expression_set, pseudo_count = 1) {
 #' @param expression_set Expression Set object
 #' @return a quantile normalized expression set object
 #' @examples
-#' \dontrun{
 #' library(airway)
 #' data(airway)
 #' expression_set <- loadfromSumE(airway)
 #' exp_set_filtered <- filter_low_exp(expression_set)
 #' exp_set_log <- log_transform(exp_set_filtered)
 #' exp_set_norm <- quantile_norm(exp_set_log)
-#' }
 #' @export
 
 quantile_norm <- function(expression_set) {
