@@ -1,12 +1,12 @@
 library(GeneExpressionAnalysis)
 library(Biobase)
 
-# mock ExpressionSet for testing
+# mock ExpressionSet for testing the pipeline
 mock_data <- matrix(runif(100, 10, 1000), nrow = 10)
 rownames(mock_data) <- paste0("gene", 1:10)
 colnames(mock_data) <- paste0("sample", 1:10)
 
-# gene2 is all zeros so we can verify filtering
+# gene2 is all zeros so we can verify the filtering
 mock_data[2, ] <- 0
 
 mock_pheno <- data.frame(
@@ -35,14 +35,14 @@ test_that("loadfromCSV errors on missing file", {
 
 # Preprocessing of the data including filtering, log transform, normalization, outliers
 
-test_that("filter_low_exp drops low expression genes", {
+test_that("filter_low_exp drops the low expression genes", {
   res <- filter_low_exp(mock_eset, min_count = 5)
   expect_s4_class(res, "ExpressionSet")
   expect_false("gene2" %in% rownames(exprs(res)))
   expect_equal(nrow(exprs(res)), 9)
 })
 
-test_that("log_transform correctly scales values", {
+test_that("log_transform correctly scales the values", {
   res <- log_transform(mock_eset, pseudo_count = 1)
   expect_s4_class(res, "ExpressionSet")
   expect_true(max(exprs(res)) < 50)
@@ -124,7 +124,7 @@ test_that("plot_boxplot works with log_scale", {
   expect_s3_class(p, "ggplot")
 })
 
-test_that("plot_heatmap runs without error", {
+test_that("plot_heatmap runs correctly", {
   exp_norm <- quantile_norm(log_transform(filter_low_exp(mock_eset, min_count = 5)))
   expect_no_error(plot_heatmap(exp_norm, top_n_genes = 5))
 })
@@ -135,20 +135,20 @@ test_that("plot_PCA returns a ggplot", {
   expect_s3_class(p, "ggplot")
 })
 
-test_that("plot_den returns an hclust object invisibly", {
+test_that("plot_den returns an hclust object", {
   hc <- hierarchical_clust(log_transform(mock_eset))
   res <- plot_den(hc$hclust)
   expect_s3_class(res, "hclust")
 })
 
-test_that("plot_sample_den returns an hclust object invisibly", {
+test_that("plot_sample_den returns an hclust object", {
   res <- plot_sample_den(log_transform(mock_eset))
   expect_s3_class(res, "hclust")
 })
 
 # testing of the full pipeline which is the most efficient way to run the analysis
 
-test_that("run_full_pipeline executes end-to-end", {
+test_that("run_full_pipeline executes correctly", {
   skip_if_not_installed("org.Hs.eg.db")
   skip_if_not_installed("airway")
 
