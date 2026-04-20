@@ -77,6 +77,7 @@ go_gse <- function(expression_set, condition_col, reference_level, OrgDb = "org.
 #'
 #' @param enrichment_result An enrichment result object
 #' @param top_n Number of top enriched terms to plot
+#' @param title Title of the plot
 #' @return A plot of the enrichment results
 #' @examples
 #' library(airway)
@@ -88,15 +89,14 @@ go_gse <- function(expression_set, condition_col, reference_level, OrgDb = "org.
 #' plot_enrichment(go_result)
 #' @export
 
-plot_enrichment <- function(enrichment_result, top_n = 10) {
+plot_enrichment <- function(enrichment_result, top_n = 10, title = "Enrichment analysis") {
   # if no significant pathways were found, return an error message
   if (nrow(as.data.frame(enrichment_result)) == 0) {
     message("No significant enrichment pathways found to plot.")
-    return(invisible(NULL))
   }
 
   enrichplot::dotplot(enrichment_result, showCategory = top_n) +
     ggplot2::scale_color_viridis_c() +
     ggplot2::theme_minimal() +
-    ggplot2::ggtitle("Enrichment analysis")
+    ggplot2::ggtitle(title)
 }

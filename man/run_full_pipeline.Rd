@@ -7,7 +7,6 @@
 run_full_pipeline(
   expression_set,
   k_clusters = 5,
-  seed = 42,
   method = "complete",
   top_n = 10,
   enrich_cluster = 1,
@@ -28,8 +27,6 @@ run_full_pipeline(
 \item{expression_set}{An expression set object}
 
 \item{k_clusters}{Number of clusters, default is set to 5}
-
-\item{seed}{Seed for reproducibility, default is set to 42}
 
 \item{method}{The hierarchical clustering method to be used, default is set to "complete"}
 

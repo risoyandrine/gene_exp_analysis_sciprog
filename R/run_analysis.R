@@ -2,7 +2,6 @@
 #'
 #' @param expression_set An expression set object
 #' @param k_clusters Number of clusters, default is set to 5
-#' @param seed Seed for reproducibility, default is set to 42
 #' @param method The hierarchical clustering method to be used, default is set to "complete"
 #' @param top_n Number of top enriched terms to plot, default is set to 10
 #' @param enrich_cluster The cluster to be used for the enrichment analysis, default is set to 1
@@ -37,7 +36,7 @@
 
 
 run_full_pipeline <- function(expression_set, k_clusters = 5,
-                              seed = 42, method = "complete", top_n = 10,
+                              method = "complete", top_n = 10,
                               enrich_cluster = 1, condition_col = "dex",
                               reference_level = "untrt",
                               OrgDb = "org.Hs.eg.db",
@@ -49,6 +48,9 @@ run_full_pipeline <- function(expression_set, k_clusters = 5,
   if (enrich_cluster > k_clusters) {
     stop("enrich_cluster cannot be greater than k_clusters")
   }
+
+  # plot the distribution of the data before normalization
+  print(plot_boxplot(expression_set, title = "Boxplot of Raw Data"))
 
   # step 1: preprocessing of the data
   expression_set <- remove_outliers(expression_set, threshold = threshold)
@@ -66,7 +68,7 @@ run_full_pipeline <- function(expression_set, k_clusters = 5,
 
   # step 2: clustering
   optimal_k(expression_set, max_k = 10)
-  km <- kmeans_clust(expression_set, k_clusters, seed)
+  km <- kmeans_clust(expression_set, k_clusters)
   hc <- hierarchical_clust(expression_set, method)
 
   # step 3: enrichment analysis
@@ -93,9 +95,9 @@ run_full_pipeline <- function(expression_set, k_clusters = 5,
   plot_den(hc_vis$hclust)
 
   plot_sample_den(expression_set)
-  print(plot_enrichment(go_result, top_n = top_n))
-  print(plot_enrichment(kegg_result, top_n = top_n))
-  print(plot_enrichment(gse_result, top_n = top_n))
+  print(plot_enrichment(go_result, top_n = top_n, title = "GO Enrichment"))
+  print(plot_enrichment(kegg_result, top_n = top_n, title = "KEGG Enrichment"))
+  print(plot_enrichment(gse_result, top_n = top_n, title = "GSEA Enrichment"))
   cat("\nExploratory Analysis Summary:\n")
   print(expression_summary(expression_set))
   cat("\nClustering Analysis Summary:\n")

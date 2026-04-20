@@ -4,12 +4,14 @@
 \alias{plot_enrichment}
 \title{Plot the enrichment results}
 \usage{
-plot_enrichment(enrichment_result, top_n = 10)
+plot_enrichment(enrichment_result, top_n = 10, title = "Enrichment analysis")
 }
 \arguments{
 \item{enrichment_result}{An enrichment result object}
 
 \item{top_n}{Number of top enriched terms to plot}
+
+\item{title}{Title of the plot}
 }
 \value{
 A plot of the enrichment results
