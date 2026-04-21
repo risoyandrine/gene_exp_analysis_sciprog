@@ -18,8 +18,7 @@ A ggplot object showing the elbow plot
 Plot the Elbow Method to find the optimal number of clusters
 }
 \examples{
-library(airway)
-data(airway)
-expression_set <- loadfromSumE(airway)
+data(example_airway)
+expression_set <- example_airway
 optimal_k(expression_set)
 }

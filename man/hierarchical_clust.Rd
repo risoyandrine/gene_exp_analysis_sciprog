@@ -18,9 +18,13 @@ A hierarchical clustering object
 Performs a hierarchical clustering on the expression data
 }
 \examples{
-library(airway)
-data(airway)
-expression_set <- loadfromSumE(airway)
+data(example_airway)
+expression_set <- example_airway
+expression_set <- filter_low_exp(expression_set)
+expression_set <- log_transform(expression_set)
+expression_set <- quantile_norm(expression_set)
+gene_var <- apply(Biobase::exprs(expression_set), 1, var)
+expression_set <- expression_set[order(gene_var, decreasing = TRUE)[1:50], ]
 hc_tree <- hierarchical_clust(expression_set, "complete")
-hc_clust <- cutree(hc_tree, k = 5)
+hc_clust <- cutree(hc_tree$hclust, k = 5)
 }

@@ -5,3 +5,4 @@
 ^Meta$
 .DS_Store
 ^\.git$
+^GeneExpressionAnalysis\.BiocCheck$

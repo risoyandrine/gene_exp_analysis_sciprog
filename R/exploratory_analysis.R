@@ -4,9 +4,8 @@
 #' @param title Plot title for the distribution plot
 #' @return a ggplot2 plot of the expression distribution
 #' @examples
-#' library(airway)
-#' data(airway)
-#' expression_set <- loadfromSumE(airway)
+#' data(example_airway)
+#' expression_set <- example_airway
 #' expression_set <- filter_low_exp(expression_set)
 #' expression_set <- log_transform(expression_set)
 #' plot_distr(expression_set)
@@ -35,9 +34,8 @@ plot_distr <- function(expression_set, title = "Distribution of Expression Data"
 #' @param threshold Tolerated standard deviations from the mean
 #' @return Outlier genes
 #' @examples
-#' library(airway)
-#' data(airway)
-#' expression_set <- loadfromSumE(airway)
+#' data(example_airway)
+#' expression_set <- example_airway
 #' expression_set <- filter_low_exp(expression_set)
 #' expression_set <- log_transform(expression_set)
 #' gene_outlier_detection(expression_set, threshold = 3)
@@ -67,9 +65,8 @@ gene_outlier_detection <- function(expression_set, threshold = 3) {
 #' @param threshold Tolerated standard deviations from the mean
 #' @return Outlier samples
 #' @examples
-#' library(airway)
-#' data(airway)
-#' expression_set <- loadfromSumE(airway)
+#' data(example_airway)
+#' expression_set <- example_airway
 #' expression_set <- filter_low_exp(expression_set)
 #' expression_set <- log_transform(expression_set)
 #' sample_outlier_detection(expression_set, threshold = 3)
@@ -95,9 +92,8 @@ sample_outlier_detection <- function(expression_set, threshold = 3) {
 #' @param expression_set An expression set object
 #' @return Invisible NULL, prints the summary of the expression data to console
 #' @examples
-#' library(airway)
-#' data(airway)
-#' expression_set <- loadfromSumE(airway)
+#' data(example_airway)
+#' expression_set <- example_airway
 #' expression_summary(expression_set)
 #' @export
 
@@ -122,9 +118,8 @@ expression_summary <- function(expression_set) {
 #' @param threshold Tolerated standard deviations from the mean
 #' @return A filtered expression set object with outlier genes removed
 #' @examples
-#' library(airway)
-#' data(airway)
-#' expression_set <- loadfromSumE(airway)
+#' data(example_airway)
+#' expression_set <- example_airway
 #' expression_set <- filter_low_exp(expression_set)
 #' exp_clean <- remove_outliers(expression_set, threshold = 3)
 #' @export
@@ -153,9 +148,8 @@ remove_outliers <- function(expression_set, threshold = 3) {
 #' @param log_scale Logical, whether to apply a log2 transformation before plotting. Default is FALSE.
 #' @return a ggplot2 boxplot of the expression distribution
 #' @examples
-#' library(airway)
-#' data(airway)
-#' expression_set <- loadfromSumE(airway)
+#' data(example_airway)
+#' expression_set <- example_airway
 #' expression_set <- filter_low_exp(expression_set)
 #' plot_boxplot(expression_set, log_scale = TRUE)
 #' @export

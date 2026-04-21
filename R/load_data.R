@@ -3,7 +3,9 @@
 #' @param file Represents a path to a CSV file with genes as rows and samples as columns
 #' @return An ExpressionSet object
 #' @examples
+#' \donttest{
 #' expression_set <- loadfromCSV("path/to/data.csv")
+#' }
 #' @export
 loadfromCSV <- function(file) {
   if (!file.exists(file)) {
@@ -20,9 +22,8 @@ loadfromCSV <- function(file) {
 #' @param SumE A SummarizedExperiment object
 #' @return An ExpressionSet object
 #' @examples
-#' library(airway)
-#' data(airway)
-#' expression_set <- loadfromSumE(airway)
+#' data(example_airway)
+#' expression_set <- example_airway
 #' @export
 
 loadfromSumE <- function(SumE) {

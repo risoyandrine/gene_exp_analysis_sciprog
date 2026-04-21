@@ -8,13 +8,14 @@
 #' @param top_n_genes Integer, the number of top variable genes to plot if the dataset is large. Default is 1000.
 #' @return a heatmap of the gene expression
 #' @examples
-#' library(airway)
-#' data(airway)
-#' expression_set <- loadfromSumE(airway)
+#' \donttest{
+#' data(example_airway)
+#' expression_set <- example_airway
 #' exp_set_filtered <- filter_low_exp(expression_set)
 #' exp_set_log <- log_transform(exp_set_filtered)
 #' exp_set_norm <- quantile_norm(exp_set_log)
 #' plot_heatmap(exp_set_norm)
+#' }
 #' @export
 
 
@@ -37,7 +38,7 @@ plot_heatmap <- function(expression_set,
     exp <- exp[order(gene_vars, decreasing = TRUE)[seq_len(top_n_genes)], ]
   }
 
-  # Custom blue-white-red palette
+  # custom blue to white to red color palette
   my_colors <- colorRampPalette(c("navy", "white", "red"))(50)
 
   pheatmap::pheatmap(exp,
@@ -56,9 +57,8 @@ plot_heatmap <- function(expression_set,
 #' @param top_genes_pca The number of top variable genes to use for PCA. Default is 500.
 #' @return a PCA plot of the gene expression
 #' @examples
-#' library(airway)
-#' data(airway)
-#' expression_set <- loadfromSumE(airway)
+#' data(example_airway)
+#' expression_set <- example_airway
 #' exp_set_filtered <- filter_low_exp(expression_set)
 #' exp_set_log <- log_transform(exp_set_filtered)
 #' exp_set_norm <- quantile_norm(exp_set_log)
@@ -109,9 +109,8 @@ plot_PCA <- function(expression_set, top_genes_pca = 500) {
 #' @param hc An hclust object
 #' @return plots the dendrogram
 #' @examples
-#' library(airway)
-#' data(airway)
-#' expression_set <- loadfromSumE(airway)
+#' data(example_airway)
+#' expression_set <- example_airway
 #' exp_set_filtered <- filter_low_exp(expression_set)
 #' exp_set_log <- log_transform(exp_set_filtered)
 #' exp_set_norm <- quantile_norm(exp_set_log)
@@ -130,9 +129,8 @@ plot_den <- function(hc) {
 #' @param method The hierarchical clustering method to be used, default is "complete"
 #' @return plots the dendrogram
 #' @examples
-#' library(airway)
-#' data(airway)
-#' expression_set <- loadfromSumE(airway)
+#' data(example_airway)
+#' expression_set <- example_airway
 #' exp_set_filtered <- filter_low_exp(expression_set)
 #' exp_set_log <- log_transform(exp_set_filtered)
 #' exp_set_norm <- quantile_norm(exp_set_log)

@@ -16,5 +16,7 @@ An ExpressionSet object
 This function will load gene expression data from a CSV file and read in ExpressionSet
 }
 \examples{
+\donttest{
 expression_set <- loadfromCSV("path/to/data.csv")
+}
 }

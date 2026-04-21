@@ -18,9 +18,8 @@ A kmeans object
 Performs a Kmeans clustering on the expression data
 }
 \examples{
-library(airway)
-data(airway)
-expression_set <- loadfromSumE(airway)
+data(example_airway)
+expression_set <- example_airway
 km_result <- kmeans_clust(expression_set, 5)
 km_clust <- km_result$cluster
 }

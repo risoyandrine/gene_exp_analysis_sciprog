@@ -5,9 +5,8 @@
 #' @param keyType Type of gene ID, default is "ENSEMBL"
 #' @return A GO enrichment object
 #' @examples
-#' library(airway)
-#' data(airway)
-#' expression_set <- loadfromSumE(airway)
+#' data(example_airway)
+#' expression_set <- example_airway
 #' km <- kmeans_clust(expression_set, 5)
 #' gene_list <- names(km$cluster[km$cluster == 1])
 #' go_enrich(gene_list)
@@ -26,9 +25,8 @@ go_enrich <- function(gene_list, OrgDb = "org.Hs.eg.db", keyType = "ENSEMBL") {
 #' @param keyType Type of gene ID, default is "ENSEMBL"
 #' @return A KEGG enrichment object
 #' @examples
-#' library(airway)
-#' data(airway)
-#' expression_set <- loadfromSumE(airway)
+#' data(example_airway)
+#' expression_set <- example_airway
 #' km <- kmeans_clust(expression_set, 5)
 #' gene_list <- names(km$cluster[km$cluster == 1])
 #' kegg_enrich(gene_list)
@@ -51,9 +49,8 @@ kegg_enrich <- function(gene_list, OrgDb = "org.Hs.eg.db", organism = "hsa", key
 #' @param keyType Type of gene ID, default is "ENSEMBL"
 #' @return A GSEA enrichment object
 #' @examples
-#' library(airway)
-#' data(airway)
-#' expression_set <- loadfromSumE(airway)
+#' data(example_airway)
+#' expression_set <- example_airway
 #' exp_norm <- quantile_norm(log_transform(filter_low_exp(expression_set)))
 #' go_gse(exp_norm, condition_col = "dex", reference_level = "untrt")
 #' @export
@@ -80,9 +77,8 @@ go_gse <- function(expression_set, condition_col, reference_level, OrgDb = "org.
 #' @param title Title of the plot
 #' @return A plot of the enrichment results
 #' @examples
-#' library(airway)
-#' data(airway)
-#' expression_set <- loadfromSumE(airway)
+#' data(example_airway)
+#' expression_set <- example_airway
 #' km <- kmeans_clust(expression_set, 5)
 #' gene_list <- names(km$cluster[km$cluster == 1])
 #' go_result <- go_enrich(gene_list)

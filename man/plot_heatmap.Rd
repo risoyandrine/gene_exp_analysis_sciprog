@@ -33,11 +33,12 @@ a heatmap of the gene expression
 Plot heatmap using pheatmap
 }
 \examples{
-library(airway)
-data(airway)
-expression_set <- loadfromSumE(airway)
+\donttest{
+data(example_airway)
+expression_set <- example_airway
 exp_set_filtered <- filter_low_exp(expression_set)
 exp_set_log <- log_transform(exp_set_filtered)
 exp_set_norm <- quantile_norm(exp_set_log)
 plot_heatmap(exp_set_norm)
+}
 }

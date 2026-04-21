@@ -27,8 +27,7 @@ a filtered expression set object without the lowly expressed genes
 This function normalizes the data, specifically it filters out low expression genes
 }
 \examples{
-library(airway)
-data(airway)
-expression_set <- loadfromSumE(airway)
+data(example_airway)
+expression_set <- example_airway
 exp_set_filtered <- filter_low_exp(expression_set, already_log = FALSE)
 }

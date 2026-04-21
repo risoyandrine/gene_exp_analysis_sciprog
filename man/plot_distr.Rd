@@ -18,9 +18,8 @@ a ggplot2 plot of the expression distribution
 This function plots the distribution of expression values per sample
 }
 \examples{
-library(airway)
-data(airway)
-expression_set <- loadfromSumE(airway)
+data(example_airway)
+expression_set <- example_airway
 expression_set <- filter_low_exp(expression_set)
 expression_set <- log_transform(expression_set)
 plot_distr(expression_set)

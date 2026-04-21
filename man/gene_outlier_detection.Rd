@@ -18,9 +18,8 @@ Outlier genes
 This function will detect potential outliers from the data
 }
 \examples{
-library(airway)
-data(airway)
-expression_set <- loadfromSumE(airway)
+data(example_airway)
+expression_set <- example_airway
 expression_set <- filter_low_exp(expression_set)
 expression_set <- log_transform(expression_set)
 gene_outlier_detection(expression_set, threshold = 3)

@@ -16,8 +16,7 @@ Invisible NULL, prints the summary of the expression data to console
 Summary of the expression data
 }
 \examples{
-library(airway)
-data(airway)
-expression_set <- loadfromSumE(airway)
+data(example_airway)
+expression_set <- example_airway
 expression_summary(expression_set)
 }

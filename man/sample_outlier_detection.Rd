@@ -18,9 +18,8 @@ Outlier samples
 This function will detect high variance samples
 }
 \examples{
-library(airway)
-data(airway)
-expression_set <- loadfromSumE(airway)
+data(example_airway)
+expression_set <- example_airway
 expression_set <- filter_low_exp(expression_set)
 expression_set <- log_transform(expression_set)
 sample_outlier_detection(expression_set, threshold = 3)

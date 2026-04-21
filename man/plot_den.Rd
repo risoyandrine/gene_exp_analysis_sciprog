@@ -16,9 +16,8 @@ plots the dendrogram
 Plot dendrogram
 }
 \examples{
-library(airway)
-data(airway)
-expression_set <- loadfromSumE(airway)
+data(example_airway)
+expression_set <- example_airway
 exp_set_filtered <- filter_low_exp(expression_set)
 exp_set_log <- log_transform(exp_set_filtered)
 exp_set_norm <- quantile_norm(exp_set_log)

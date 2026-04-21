@@ -4,9 +4,8 @@
 #' @param k_clusters Number of clusters, default is set to 5
 #' @return A kmeans object
 #' @examples
-#' library(airway)
-#' data(airway)
-#' expression_set <- loadfromSumE(airway)
+#' data(example_airway)
+#' expression_set <- example_airway
 #' km_result <- kmeans_clust(expression_set, 5)
 #' km_clust <- km_result$cluster
 #' @export
@@ -33,11 +32,15 @@ kmeans_clust <- function(expression_set, k_clusters = 5) {
 #' @param method The hierarchical clustering method to be used, set to complete as default
 #' @return A hierarchical clustering object
 #' @examples
-#' library(airway)
-#' data(airway)
-#' expression_set <- loadfromSumE(airway)
+#' data(example_airway)
+#' expression_set <- example_airway
+#' expression_set <- filter_low_exp(expression_set)
+#' expression_set <- log_transform(expression_set)
+#' expression_set <- quantile_norm(expression_set)
+#' gene_var <- apply(Biobase::exprs(expression_set), 1, var)
+#' expression_set <- expression_set[order(gene_var, decreasing = TRUE)[1:50], ]
 #' hc_tree <- hierarchical_clust(expression_set, "complete")
-#' hc_clust <- cutree(hc_tree, k = 5)
+#' hc_clust <- cutree(hc_tree$hclust, k = 5)
 #' @export
 
 hierarchical_clust <- function(expression_set, method = "complete") {
@@ -56,9 +59,8 @@ hierarchical_clust <- function(expression_set, method = "complete") {
 #' @param max_k The maximum number of clusters to test, default is 10
 #' @return A ggplot object showing the elbow plot
 #' @examples
-#' library(airway)
-#' data(airway)
-#' expression_set <- loadfromSumE(airway)
+#' data(example_airway)
+#' expression_set <- example_airway
 #' optimal_k(expression_set)
 #' @export
 optimal_k <- function(expression_set, max_k = 10) {

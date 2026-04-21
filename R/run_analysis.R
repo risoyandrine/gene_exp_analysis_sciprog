@@ -26,10 +26,9 @@
 #'   \item gsea: GSEA enrichment results
 #' }
 #' @examples
-#' if (requireNamespace("airway", quietly = TRUE)) {
-#'   library(airway)
-#'   data(airway)
-#'   expression_set <- loadfromSumE(airway)
+#' if (requireNamespace("example_airway", quietly = TRUE)) {
+#'   data(example_airway)
+#'   expression_set <- example_airway
 #'   run_full_pipeline(expression_set)
 #' }
 #' @export

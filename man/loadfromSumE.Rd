@@ -16,7 +16,6 @@ An ExpressionSet object
 This function can read a summarized experiment object (like we are using as an example, the airway dataset) and convert to expression set
 }
 \examples{
-library(airway)
-data(airway)
-expression_set <- loadfromSumE(airway)
+data(example_airway)
+expression_set <- example_airway
 }

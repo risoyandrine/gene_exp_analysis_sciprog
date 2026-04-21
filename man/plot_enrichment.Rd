@@ -20,9 +20,8 @@ A plot of the enrichment results
 Plot the enrichment results
 }
 \examples{
-library(airway)
-data(airway)
-expression_set <- loadfromSumE(airway)
+data(example_airway)
+expression_set <- example_airway
 km <- kmeans_clust(expression_set, 5)
 gene_list <- names(km$cluster[km$cluster == 1])
 go_result <- go_enrich(gene_list)

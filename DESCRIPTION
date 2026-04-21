@@ -33,5 +33,4 @@ Imports:
     clusterProfiler,
     enrichplot, 
     methods,
-    grDevices
-    
+    grDevices    
