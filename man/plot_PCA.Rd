@@ -18,7 +18,7 @@ a PCA plot of the gene expression
 Plot PCA plot
 }
 \examples{
-data(example_airway)
+data(example_airway, package = "GeneExpressionAnalysis")
 expression_set <- example_airway
 exp_set_filtered <- filter_low_exp(expression_set)
 exp_set_log <- log_transform(exp_set_filtered)

@@ -18,7 +18,7 @@ A kmeans object
 Performs a Kmeans clustering on the expression data
 }
 \examples{
-data(example_airway)
+data(example_airway, package = "GeneExpressionAnalysis")
 expression_set <- example_airway
 km_result <- kmeans_clust(expression_set, 5)
 km_clust <- km_result$cluster

@@ -16,6 +16,6 @@ An ExpressionSet object
 This function can read a summarized experiment object (like we are using as an example, the airway dataset) and convert to expression set
 }
 \examples{
-data(example_airway)
+data(example_airway, package = "GeneExpressionAnalysis")
 expression_set <- example_airway
 }

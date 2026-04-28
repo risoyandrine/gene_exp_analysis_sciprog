@@ -3,6 +3,7 @@
 #' @importFrom grDevices colorRampPalette
 #' @importFrom methods is
 #' @importFrom tidyr pivot_longer
+#' @importFrom utils capture.output
 NULL
 
 utils::globalVariables(c("pc_1", "pc_2", "gene", "expression", "sample"))

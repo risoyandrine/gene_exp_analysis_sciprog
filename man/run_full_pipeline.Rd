@@ -71,9 +71,9 @@ A list containing:
 The function runs the full pipeline
 }
 \examples{
-if (requireNamespace("example_airway", quietly = TRUE)) {
-  data(example_airway)
-  expression_set <- example_airway
-  run_full_pipeline(expression_set)
+\dontrun{
+data(example_airway, package = "GeneExpressionAnalysis")
+expression_set <- example_airway
+run_full_pipeline(expression_set)
 }
 }

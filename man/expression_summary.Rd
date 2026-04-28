@@ -10,13 +10,13 @@ expression_summary(expression_set)
 \item{expression_set}{An expression set object}
 }
 \value{
-Invisible NULL, prints the summary of the expression data to console
+Invisible NULL, writes the summary of the expression data to the console via message()
 }
 \description{
 Summary of the expression data
 }
 \examples{
-data(example_airway)
+data(example_airway, package = "GeneExpressionAnalysis")
 expression_set <- example_airway
 expression_summary(expression_set)
 }

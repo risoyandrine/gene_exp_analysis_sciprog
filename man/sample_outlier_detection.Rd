@@ -18,7 +18,7 @@ Outlier samples
 This function will detect high variance samples
 }
 \examples{
-data(example_airway)
+data(example_airway, package = "GeneExpressionAnalysis")
 expression_set <- example_airway
 expression_set <- filter_low_exp(expression_set)
 expression_set <- log_transform(expression_set)

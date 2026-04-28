@@ -26,10 +26,10 @@
 #'   \item gsea: GSEA enrichment results
 #' }
 #' @examples
-#' if (requireNamespace("example_airway", quietly = TRUE)) {
-#'   data(example_airway)
-#'   expression_set <- example_airway
-#'   run_full_pipeline(expression_set)
+#' \dontrun{
+#' data(example_airway, package = "GeneExpressionAnalysis")
+#' expression_set <- example_airway
+#' run_full_pipeline(expression_set)
 #' }
 #' @export
 
@@ -49,7 +49,7 @@ run_full_pipeline <- function(expression_set, k_clusters = 5,
   }
 
   # plot the distribution of the data before normalization
-  print(plot_boxplot(expression_set, title = "Boxplot of Raw Data"))
+  methods::show(plot_boxplot(expression_set, title = "Boxplot of Raw Data"))
 
   # step 1: preprocessing of the data
   expression_set <- remove_outliers(expression_set, threshold = threshold)
@@ -66,7 +66,7 @@ run_full_pipeline <- function(expression_set, k_clusters = 5,
   expression_set <- quantile_norm(expression_set)
 
   # step 2: clustering
-  print(optimal_k(expression_set, max_k = 10))
+  methods::show(optimal_k(expression_set, max_k = 10))
   km <- kmeans_clust(expression_set, k_clusters)
   hc <- hierarchical_clust(expression_set, method)
 
@@ -83,10 +83,10 @@ run_full_pipeline <- function(expression_set, k_clusters = 5,
     OrgDb = OrgDb, keyType = keyType
   )
   # step 4: plotting
-  print(plot_distr(expression_set))
-  print(plot_boxplot(expression_set, title = "Boxplot of Normalized Data"))
+  methods::show(plot_distr(expression_set))
+  methods::show(plot_boxplot(expression_set, title = "Boxplot of Normalized Data"))
   plot_heatmap(expression_set, top_n_genes = top_n_genes)
-  print(plot_PCA(expression_set, top_genes_pca = top_genes_pca))
+  methods::show(plot_PCA(expression_set, top_genes_pca = top_genes_pca))
 
   gene_var <- apply(Biobase::exprs(expression_set), 1, var)
   exp_top <- expression_set[order(gene_var, decreasing = TRUE)[seq_len(50)], ]
@@ -94,21 +94,21 @@ run_full_pipeline <- function(expression_set, k_clusters = 5,
   plot_den(hc_vis$hclust)
 
   plot_sample_den(expression_set)
-  print(plot_enrichment(go_result, top_n = top_n, title = "GO Enrichment"))
-  print(plot_enrichment(kegg_result, top_n = top_n, title = "KEGG Enrichment"))
-  print(plot_enrichment(gse_result, top_n = top_n, title = "GSEA Enrichment"))
-  cat("\nExploratory Analysis Summary:\n")
-  print(expression_summary(expression_set))
-  cat("\nClustering Analysis Summary:\n")
-  print(table(km$cluster))
+  methods::show(plot_enrichment(go_result, top_n = top_n, title = "GO Enrichment"))
+  methods::show(plot_enrichment(kegg_result, top_n = top_n, title = "KEGG Enrichment"))
+  methods::show(plot_enrichment(gse_result, top_n = top_n, title = "GSEA Enrichment"))
+  message("\nExploratory Analysis Summary:")
+  expression_summary(expression_set)
+  message("\nClustering Analysis Summary:")
+  message(paste(capture.output(table(km$cluster)), collapse = "\n"))
 
-  cat("\n Enrichment Analysis\n")
+  message("\nEnrichment Analysis")
 
   print_enrich_summary <- function(result_obj, name) {
     df <- as.data.frame(result_obj)
-    cat(sprintf("Significant %s terms: %d\n", name, nrow(df)))
+    message(sprintf("Significant %s terms: %d", name, nrow(df)))
     if (nrow(df) > 0) {
-      cat("Top hits:", paste(head(df$Description, 3), collapse = " | "), "\n")
+      message("Top hits: ", paste(head(df$Description, 3), collapse = " | "))
     }
   }
 

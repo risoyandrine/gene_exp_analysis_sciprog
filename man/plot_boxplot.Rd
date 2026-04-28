@@ -24,7 +24,7 @@ a ggplot2 boxplot of the expression distribution
 A function to plot the expression distribution using boxplots per sample
 }
 \examples{
-data(example_airway)
+data(example_airway, package = "GeneExpressionAnalysis")
 expression_set <- example_airway
 expression_set <- filter_low_exp(expression_set)
 plot_boxplot(expression_set, log_scale = TRUE)

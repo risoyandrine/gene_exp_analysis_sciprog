@@ -18,7 +18,7 @@ A filtered expression set object with outlier genes removed
 Remove outlier genes from the expression set
 }
 \examples{
-data(example_airway)
+data(example_airway, package = "GeneExpressionAnalysis")
 expression_set <- example_airway
 expression_set <- filter_low_exp(expression_set)
 exp_clean <- remove_outliers(expression_set, threshold = 3)

@@ -77,7 +77,7 @@ test_that("remove_outliers preserves ExpressionSet structure", {
 # testing of the exploratory analysis on the data
 
 test_that("expression_summary prints and returns invisible NULL", {
-  output <- capture.output(res <- expression_summary(mock_eset), type = "output")
+  output <- capture.output(res <- expression_summary(mock_eset), type = "message")
   expect_null(res)
   expect_true(any(grepl("Number of genes", output)))
   expect_true(any(grepl("Number of samples", output)))

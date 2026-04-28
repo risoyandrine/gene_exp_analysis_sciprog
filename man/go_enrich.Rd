@@ -20,7 +20,7 @@ A GO enrichment object
 Performs a GO enrichment analysis
 }
 \examples{
-data(example_airway)
+data(example_airway, package = "GeneExpressionAnalysis")
 expression_set <- example_airway
 km <- kmeans_clust(expression_set, 5)
 gene_list <- names(km$cluster[km$cluster == 1])

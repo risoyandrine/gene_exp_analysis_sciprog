@@ -9,7 +9,7 @@
 #' @return a heatmap of the gene expression
 #' @examples
 #' \donttest{
-#' data(example_airway)
+#' data(example_airway, package = "GeneExpressionAnalysis")
 #' expression_set <- example_airway
 #' exp_set_filtered <- filter_low_exp(expression_set)
 #' exp_set_log <- log_transform(exp_set_filtered)
@@ -27,6 +27,9 @@ plot_heatmap <- function(expression_set,
                          top_n_genes = 1000) {
   exp <- Biobase::exprs(expression_set)
 
+  gene_vars <- apply(exp, 1, var, na.rm = TRUE)
+  exp <- exp[gene_vars > 0 & !is.na(gene_vars), ]
+
   # prevent memory exhaustion on large datasets by visualizing only the top variable genes
   if (nrow(exp) > top_n_genes) {
     message(sprintf(
@@ -34,8 +37,8 @@ plot_heatmap <- function(expression_set,
                     subsetting to top %d most variable genes for heatmap visualization.",
       top_n_genes, top_n_genes
     ))
-    gene_vars <- apply(exp, 1, var, na.rm = TRUE)
-    exp <- exp[order(gene_vars, decreasing = TRUE)[seq_len(top_n_genes)], ]
+    gene_vars_current <- apply(exp, 1, var, na.rm = TRUE)
+    exp <- exp[order(gene_vars_current, decreasing = TRUE)[seq_len(top_n_genes)], ]
   }
 
   # custom blue to white to red color palette
@@ -57,7 +60,7 @@ plot_heatmap <- function(expression_set,
 #' @param top_genes_pca The number of top variable genes to use for PCA. Default is 500.
 #' @return a PCA plot of the gene expression
 #' @examples
-#' data(example_airway)
+#' data(example_airway, package = "GeneExpressionAnalysis")
 #' expression_set <- example_airway
 #' exp_set_filtered <- filter_low_exp(expression_set)
 #' exp_set_log <- log_transform(exp_set_filtered)
@@ -109,7 +112,7 @@ plot_PCA <- function(expression_set, top_genes_pca = 500) {
 #' @param hc An hclust object
 #' @return plots the dendrogram
 #' @examples
-#' data(example_airway)
+#' data(example_airway, package = "GeneExpressionAnalysis")
 #' expression_set <- example_airway
 #' exp_set_filtered <- filter_low_exp(expression_set)
 #' exp_set_log <- log_transform(exp_set_filtered)
@@ -129,7 +132,7 @@ plot_den <- function(hc) {
 #' @param method The hierarchical clustering method to be used, default is "complete"
 #' @return plots the dendrogram
 #' @examples
-#' data(example_airway)
+#' data(example_airway, package = "GeneExpressionAnalysis")
 #' expression_set <- example_airway
 #' exp_set_filtered <- filter_low_exp(expression_set)
 #' exp_set_log <- log_transform(exp_set_filtered)

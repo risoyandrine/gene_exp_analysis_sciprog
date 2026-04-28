@@ -5,4 +5,7 @@
 #'
 #' @format An ExpressionSet object
 #' @source airway package
+#' @docType data
+#' @name example_airway
+#' @usage data(example_airway)
 "example_airway"

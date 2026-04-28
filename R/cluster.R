@@ -4,7 +4,7 @@
 #' @param k_clusters Number of clusters, default is set to 5
 #' @return A kmeans object
 #' @examples
-#' data(example_airway)
+#' data(example_airway, package = "GeneExpressionAnalysis")
 #' expression_set <- example_airway
 #' km_result <- kmeans_clust(expression_set, 5)
 #' km_clust <- km_result$cluster
@@ -32,7 +32,7 @@ kmeans_clust <- function(expression_set, k_clusters = 5) {
 #' @param method The hierarchical clustering method to be used, set to complete as default
 #' @return A hierarchical clustering object
 #' @examples
-#' data(example_airway)
+#' data(example_airway, package = "GeneExpressionAnalysis")
 #' expression_set <- example_airway
 #' expression_set <- filter_low_exp(expression_set)
 #' expression_set <- log_transform(expression_set)
@@ -59,7 +59,7 @@ hierarchical_clust <- function(expression_set, method = "complete") {
 #' @param max_k The maximum number of clusters to test, default is 10
 #' @return A ggplot object showing the elbow plot
 #' @examples
-#' data(example_airway)
+#' data(example_airway, package = "GeneExpressionAnalysis")
 #' expression_set <- example_airway
 #' optimal_k(expression_set)
 #' @export

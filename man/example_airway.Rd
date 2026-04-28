@@ -11,7 +11,7 @@ An ExpressionSet object
 airway package
 }
 \usage{
-example_airway
+data(example_airway)
 }
 \description{
 A small example dataset derived from the airway package.

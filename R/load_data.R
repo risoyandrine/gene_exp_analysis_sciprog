@@ -3,7 +3,7 @@
 #' @param file Represents a path to a CSV file with genes as rows and samples as columns
 #' @return An ExpressionSet object
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' expression_set <- loadfromCSV("path/to/data.csv")
 #' }
 #' @export
@@ -22,7 +22,7 @@ loadfromCSV <- function(file) {
 #' @param SumE A SummarizedExperiment object
 #' @return An ExpressionSet object
 #' @examples
-#' data(example_airway)
+#' data(example_airway, package = "GeneExpressionAnalysis")
 #' expression_set <- example_airway
 #' @export
 
