@@ -1,4 +1,4 @@
-#' The function runs the full pipeline
+#' Runs the full pipeline of the GeneExpressionAnalysis package
 #'
 #' @param expression_set An expression set object
 #' @param k_clusters Number of clusters, default is set to 5
@@ -66,7 +66,11 @@ run_full_pipeline <- function(expression_set, k_clusters = 5,
   expression_set <- quantile_norm(expression_set)
 
   # step 2: clustering
-  methods::show(optimal_k(expression_set, max_k = 10))
+  # subset to top variable genes for the elbow plot to avoid any kmeans convergence warnings
+  gene_elbow <- apply(Biobase::exprs(expression_set), 1, stats::var)
+  elbow_subset_size <- min(2000L, nrow(expression_set))
+  eset_elbow <- expression_set[order(gene_elbow, decreasing = TRUE)[seq_len(elbow_subset_size)], ]
+  methods::show(optimal_k(eset_elbow, max_k = 10))
   km <- kmeans_clust(expression_set, k_clusters)
   hc <- hierarchical_clust(expression_set, method)
 
@@ -88,7 +92,7 @@ run_full_pipeline <- function(expression_set, k_clusters = 5,
   plot_heatmap(expression_set, top_n_genes = top_n_genes)
   methods::show(plot_PCA(expression_set, top_genes_pca = top_genes_pca))
 
-  gene_var <- apply(Biobase::exprs(expression_set), 1, var)
+  gene_var <- apply(Biobase::exprs(expression_set), 1, stats::var)
   exp_top <- expression_set[order(gene_var, decreasing = TRUE)[seq_len(50)], ]
   hc_vis <- hierarchical_clust(exp_top, method)
   plot_den(hc_vis$hclust)

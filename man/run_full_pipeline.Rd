@@ -2,7 +2,7 @@
 % Please edit documentation in R/run_analysis.R
 \name{run_full_pipeline}
 \alias{run_full_pipeline}
-\title{The function runs the full pipeline}
+\title{Runs the full pipeline of the GeneExpressionAnalysis package}
 \usage{
 run_full_pipeline(
   expression_set,
@@ -68,7 +68,7 @@ A list containing:
 }
 }
 \description{
-The function runs the full pipeline
+Runs the full pipeline of the GeneExpressionAnalysis package
 }
 \examples{
 \dontrun{

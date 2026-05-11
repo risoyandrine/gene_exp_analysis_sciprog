@@ -27,7 +27,7 @@ plot_heatmap <- function(expression_set,
                          top_n_genes = 1000) {
   exp <- Biobase::exprs(expression_set)
 
-  gene_vars <- apply(exp, 1, var, na.rm = TRUE)
+  gene_vars <- apply(exp, 1, stats::var, na.rm = TRUE)
   exp <- exp[gene_vars > 0 & !is.na(gene_vars), ]
 
   # prevent memory exhaustion on large datasets by visualizing only the top variable genes
@@ -37,7 +37,7 @@ plot_heatmap <- function(expression_set,
                     subsetting to top %d most variable genes for heatmap visualization.",
       top_n_genes, top_n_genes
     ))
-    gene_vars_current <- apply(exp, 1, var, na.rm = TRUE)
+    gene_vars_current <- apply(exp, 1, stats::var, na.rm = TRUE)
     exp <- exp[order(gene_vars_current, decreasing = TRUE)[seq_len(top_n_genes)], ]
   }
 
@@ -72,7 +72,7 @@ plot_heatmap <- function(expression_set,
 plot_PCA <- function(expression_set, top_genes_pca = 500) {
   exp <- Biobase::exprs(expression_set)
 
-  gene_vars <- apply(exp, 1, var)
+  gene_vars <- apply(exp, 1, stats::var)
   exp <- exp[gene_vars > 0, ]
 
   if (nrow(exp) > top_genes_pca) {
@@ -142,7 +142,7 @@ plot_den <- function(hc) {
 
 plot_sample_den <- function(expression_set, method = "complete") {
   exp <- Biobase::exprs(expression_set)
-  hc <- hclust(dist(t(exp)), method = method) # the t() is for transposing the matrix to cluster samples instead of genes
+  hc <- stats::hclust(stats::dist(t(exp)), method = method) # the t() is for transposing the matrix to cluster samples instead of genes
   plot(hc, main = "Sample clustering dendrogram", sub = "", xlab = "")
   invisible(hc)
 }
